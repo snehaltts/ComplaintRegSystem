@@ -39,6 +39,12 @@ public class HomeController {
 		return new ModelAndView("login");
 	}
 	
+	@RequestMapping("/putcomplaint")
+	public ModelAndView fileCompaint()
+	{
+		return new ModelAndView("complaint");
+	}
+	
 	@RequestMapping(value="adduser", method=RequestMethod.POST)
 	public ModelAndView addUser(HttpServletRequest req, Model model) {
 		ModelAndView mv=null;
@@ -66,5 +72,12 @@ public class HomeController {
 		}		
 		return mv;
 	}
+//	@RequestMapping(value = "addcompaint", method=RequestMethod.POST)
+//	public ModelAndView addCompaint(HttpServletRequest req, Model model)
+//	{
+//		ModelAndView mv = null;
+////		String complaintI
+//	
+//	}
 
 }

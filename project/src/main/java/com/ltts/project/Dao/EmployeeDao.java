@@ -48,9 +48,7 @@ public class EmployeeDao {
 	 */
 	
 	public Employee getMemberByEmai(String email) {
-		Employee m=new Employee();
-		
-		
+		Employee m=new Employee();		
 		return m;
 	}
 	
