@@ -11,16 +11,18 @@ public class Employee implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	private String empName;
 	private String designation;
 	private String department;
 	private String immediateSupervisor;
 	private String password;
-
-	@Id
 	private String email;
 	private String mobile;
+
+	@Id
+	private String empId;
+
 
 	public Employee() {
 		super();
@@ -82,8 +84,16 @@ public class Employee implements Serializable {
 		this.mobile = mobile;
 	}
 
+	public String getEmpId() {
+		return empId;
+	}
+
+	public void setEmpId(String empId) {
+		this.empId = empId;
+	}
+
 	public Employee(String empName, String designation, String department, String immediateSupervisor, String password,
-			String email, String mobile) {
+			String email, String mobile, String empId) {
 		super();
 		this.empName = empName;
 		this.designation = designation;
@@ -92,11 +102,12 @@ public class Employee implements Serializable {
 		this.password = password;
 		this.email = email;
 		this.mobile = mobile;
+		this.empId = empId;
 	}
 
 	@Override
 	public String toString() {
-		return "Employee [empName=" + empName + ", designation=" + designation + ", department=" + department
+		return "Employee [empId = " + empId + "empName=" + empName + ", designation=" + designation + ", department=" + department
 				+ ", immediateSupervisor=" + immediateSupervisor + ", password=" + password + ", email=" + email
 				+ ", mobile=" + mobile + "]";
 	}

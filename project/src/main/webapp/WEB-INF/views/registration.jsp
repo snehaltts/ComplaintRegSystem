@@ -22,6 +22,10 @@
                     </tr>
                 </thead>
                 <tbody>
+                 <tr>
+                        <td>Employee ID</td>
+                        <td><input type="text" name="empid" value="" /></td>
+                    </tr>
                     <tr>
                         <td>Full Name</td>
                         <td><input type="text" name="empname" value="" /></td>
@@ -33,10 +37,7 @@
                       <tr>
                         <td>Department</td>
                         <td><input type="text" name="department" value="" /></td>
-                    </tr>  <tr>
-                        <td>Immediate Supervisor</td>
-                        <td><input type="text" name="immsup" value="" /></td>
-                    </tr>
+                    </tr> 
                       <tr>
                         <td>Email</td>
                         <td><input type="text" name="email" value="" /></td>
@@ -55,6 +56,9 @@
                     </tr>
                     <tr>
                         <td colspan="2">Already registered!! <a href="login">Click Here To Login</a></td>
+                    </tr>
+                        <tr>
+                         <a href="/">Back To Dashboard</a></td>
                     </tr>
                 </tbody>
             </table>

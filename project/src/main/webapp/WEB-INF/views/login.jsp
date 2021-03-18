@@ -22,7 +22,7 @@
     <body bgcolor="white">
           <div class="card">
           <div class="card-body">
-        <form method="post" action="loginSuccess.jsp">
+        <form action="checkuser">
             <center>
             <table border="0" width="30%" cellpadding="3">
                 <thead>
@@ -32,12 +32,12 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Username</td>
-                        <td><input type="text" name="userName" value="" /></td>
+                        <td>EmployeeId</td>
+                        <td><input type="text" name="empid" value="" /></td>
                     </tr>
                     <tr>
                         <td>Password</td>
-                        <td><input type="password" name="password" value="" /></td>
+                        <td><input type="password" name="pass" value="" /></td>
                     </tr>
                     <tr>
                         <td><input type="submit" value="Login" class = "btn btn-primary"/></td>
@@ -45,6 +45,10 @@
                     </tr>
                     <tr>
                         <td colspan="2">New User <a href="registration" >Register Here</a></td>
+                        
+                    </tr>
+                      <tr>
+                         <a href="/">Back To Dashboard</a></td>
                     </tr>
                 </tbody>
             </table>

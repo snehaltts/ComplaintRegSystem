@@ -30,9 +30,8 @@
          </div>
          <div>
          
-               <a type = "button" class = "btn btn-default" href = "login" style = "margin-left:1400px">Login</a>
-          		 <a type = "button" class = "btn btn-default" href = "putcomplaint" style = "margin-left:100px">Add Complaint</a>
-            <a type = "button" class = "btn btn-default navbar-btn" href = "registration" style = " margin-left : 100px">Sign up</a>
+               <a type = "button" class = "btn btn-default" href = "login" style = "margin-left:1500px">Login</a>
+            <a type = "button" class = "btn btn-default navbar-btn" href = "registration" style = " margin-left : 20px">Sign up</a>
          </div>
       </nav>
    </body>

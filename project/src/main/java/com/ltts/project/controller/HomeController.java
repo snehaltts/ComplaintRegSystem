@@ -1,5 +1,7 @@
 package com.ltts.project.controller;
 
+import java.time.LocalDate;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +14,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ltts.project.Dao.EmployeeDao;
-import com.ltts.project.model.Employee;
+import com.ltts.project.Dao.*;
+import com.ltts.project.model.*;
 
 @RestController
 public class HomeController {
 	
 	@Autowired
 	EmployeeDao md;
+	@Autowired
+	ComplaintDao cd;
 	
 	@RequestMapping("/hi")
 	public String firstMethod() {
@@ -44,21 +48,26 @@ public class HomeController {
 	{
 		return new ModelAndView("complaint");
 	}
-	
+	@RequestMapping("/welcome")
+	public ModelAndView home()
+	{
+		return new ModelAndView("welcome");
+	}
 	@RequestMapping(value="adduser", method=RequestMethod.POST)
 	public ModelAndView addUser(HttpServletRequest req, Model model) {
 		ModelAndView mv=null;
+		String empId = req.getParameter("empid");
 		String empName=req.getParameter("empname");
 		String designation=req.getParameter("designation");
 		String department=req.getParameter("department");
-		String immediateSupervisor =req.getParameter("immsup");
+		String immediateSupervisor ="KNS";
 		String email = req.getParameter("email");
 		String mobile = req.getParameter("mobile");
 		String password = req.getParameter("password");
 		
 		
 	//	ApplicationContext ac=new ClassPathXmlApplicationContext();
-		Employee m=new Employee(empName, designation, department, immediateSupervisor, email, mobile, password);
+		Employee m=new Employee(empName, designation, department, immediateSupervisor, password, email , mobile, empId);
 		System.out.println("***** INSIDE CONTROLLER ****"+m);
 		boolean b=md.InsertMember(m);
 		if(b==false) {
@@ -72,12 +81,81 @@ public class HomeController {
 		}		
 		return mv;
 	}
-//	@RequestMapping(value = "addcompaint", method=RequestMethod.POST)
-//	public ModelAndView addCompaint(HttpServletRequest req, Model model)
-//	{
-//		ModelAndView mv = null;
-////		String complaintI
-//	
-//	}
+	
+	
+	@RequestMapping(value = "addcomplaint", method=RequestMethod.POST)
+	public ModelAndView addCompaint(HttpServletRequest req, Model model)
+
+	{
+		ModelAndView mv = null;
+		String complaintType = req.getParameter("complaintType");
+		LocalDate requestDate = java.time.LocalDate.now();
+		String complaintSubject = req.getParameter("complaintSubject");
+		String complaintDescription = req.getParameter("complaintDescription");
+		int compInc;
+		if(complaintType.equalsIgnoreCase("HR Department"))
+		{
+			compInc = 1;
+		}
+		else 	if(complaintType.equalsIgnoreCase("IT Department"))
+		{
+			compInc = 2;
+		}
+		else 	if(complaintType.equalsIgnoreCase("Security"))
+		{
+			compInc = 3;
+		}
+		else 
+		{
+			compInc = 4;
+		}
+		String requestStatus = "Pending";
+		System.out.println(compInc);
+		Complaint c = new Complaint (1,complaintType, requestDate,complaintDescription ,compInc,complaintSubject , requestStatus);
+		System.out.println("***** INSIDE CONTROLLER ****"+c);
+		boolean b=cd.InsertComplaint(c);
+		if(b==false) {
+			mv=new ModelAndView("success");
+			model.addAttribute("msg", "Successfully Added.. ");
+		}
+		else {
+			mv=new ModelAndView("error");
+			model.addAttribute("msg", "Error due to Connection");
+			
+		}		
+		return mv;
+	
+	}
+	@RequestMapping(value="checkuser")
+	public ModelAndView checkUser(HttpServletRequest req, Model model) {
+		ModelAndView mv=null;
+		String empId=req.getParameter("empid");
+		String pass=req.getParameter("pass");
+		System.out.println("Emoddkfnk" + empId);
+		Employee e = md.getMemberByEmpId(empId);
+
+		if(e !=null) {
+			System.out.println("E vlauuye" + pass);
+		System.out.println("Found Here");
+		
+//			if(pass.equals(e.getPassword())) {
+				if(pass.equals(e.getPassword())) {
+
+				model.addAttribute("value", e.getEmpId());
+				mv=new ModelAndView("welcome");
+			}
+			else {
+				System.out.println("Password Wriong Error");
+				model.addAttribute("msg", "Password Wrong");
+				mv=new ModelAndView("login");
+			}
+		}
+		else {
+			System.out.println("Reached and Not found");
+//			model.addAttribute("msg", "User Not Found Please Register");
+			mv=new ModelAndView("login");
+		}
+		return mv;
+	}
 
 }

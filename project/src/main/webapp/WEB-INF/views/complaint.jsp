@@ -16,7 +16,7 @@
 		<div class="card">
 			<div class="card-body">
 
-				<form method="post" action="adduser">
+				<form method="post" action="addcomplaint">
 					<center>
 						<table width="50%" cellpadding="5">
 							<thead>
@@ -27,7 +27,7 @@
 							<tbody>
 								<tr>
 									<td>Complaint Type</td>
-									<td><select class="form-control" id="sel1">
+									<td><select class="form-control" id="complainttype" name = "complaintType">
 											<option>HR Department</option>
 											<option>IT Department</option>
 											<option>Security</option>
@@ -35,8 +35,12 @@
 									</select> </td>
 								</tr>
 								<tr>
+									<td>Complaint Subject</td>
+									<td><input type="text" name="complaintSubject" value="" style = "width:350px"/></td>
+								</tr>
+								<tr>
 									<td>Complaint Description</td>
-									<td><textarea type="text" name="comdescription" value="" style = "width:350px"></textarea></td>
+									<td><textarea type="text" name="complaintDescription" value="" style = "width:350px"></textarea></td>
 								</tr>
 
 								<tr>

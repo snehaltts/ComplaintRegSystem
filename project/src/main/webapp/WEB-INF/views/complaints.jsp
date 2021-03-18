@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>${msg}</h1>
-<a href = "login">Go to Login Page</a>
+<h1>Complaints Here</h1>
 </body>
 </html>

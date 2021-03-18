@@ -7,10 +7,10 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.ltts.project.model.Employee;
+import com.ltts.project.model.Complaint;
 
 @Repository
-public class EmployeeDao {
+public class ComplaintDao {
 	
 	@Autowired
 	private EntityManager em;
@@ -19,7 +19,7 @@ public class EmployeeDao {
 	private SessionFactory sf;
 	
 	
-	public boolean InsertMember(Employee m) {
+	public boolean InsertComplaint(Complaint m) {
 		boolean b=false;
 		Session s=null;
 		try {
@@ -48,10 +48,9 @@ public class EmployeeDao {
 	 * public List<Member> getMembers(){ List }
 	 */
 	
-	public Employee getMemberByEmpId(String emp_id) {
-		Employee e = (Employee)sf.openSession().get(Employee.class, emp_id);
-		return e;
-	
-	}
+//	public Employee getMemberByEmai(String email) {
+//		Employee m=new Employee();		
+//		return m;
+//	}
 	
 }
