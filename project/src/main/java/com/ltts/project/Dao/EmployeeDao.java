@@ -35,10 +35,10 @@ public class EmployeeDao {
 			System.out.println("Exception "+e);
 			b=true;
 		}
-		finally {
-			sf.close();
-			em.close();
-		}
+//		finally {
+//			sf.close();
+////			em.close();
+//		}
 		
 		return b;
 	}

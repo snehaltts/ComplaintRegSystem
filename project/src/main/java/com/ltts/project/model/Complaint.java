@@ -13,6 +13,8 @@ public class Complaint implements Serializable {
 	private String requestStatus;
 	private String complaintDescription;
 	private String complaintSubject;
+	private String empId;
+	private String complaintRemark;
 	
 	@Id
 	@GeneratedValue
@@ -62,7 +64,7 @@ public class Complaint implements Serializable {
 		this.complaintDescription = complaintDescription;
 	}
 	public Complaint(int complaintId, String complaintType, LocalDate requestDate, 
-		 String complaintDescription, int complaintIncharge, String complaintSubject, String requestStatus) {
+		 String complaintDescription, int complaintIncharge, String complaintSubject, String requestStatus, String empId, String complaintRemark) {
 		super();
 		this.complaintId = complaintId;
 		this.complaintType = complaintType;
@@ -71,6 +73,8 @@ public class Complaint implements Serializable {
 		this.complaintSubject = complaintSubject;
 		this.complaintIncharge  = complaintIncharge;
 		this.requestStatus = requestStatus;
+		this.empId = empId;
+		this.complaintRemark = complaintRemark;
 		
 	}
 	
@@ -88,10 +92,25 @@ public class Complaint implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "Complaint [complaintId=" + complaintId + ", complaintType=" + complaintType + ", complaintIncharge="
+		return "complaintId=" + complaintId + ", complaintType=" + complaintType + ", complaintIncharge="
 				+ complaintIncharge + ", dateOfRequest=" + dateOfRequest + ", requestStatus=" + requestStatus
-				+ ", complaintDescription=" + complaintDescription + ", complaintSubject=" + complaintSubject + "]";
+				+ ", complaintDescription=" + complaintDescription + ", complaintSubject=" + complaintSubject + "";
 	}
 	
-	
+	public Complaint()
+	{
+		super();
+	}
+	public String getEmpId() {
+		return empId;
+	}
+	public void setEmpId(String empId) {
+		this.empId = empId;
+	}
+	public String getComplaintRemark() {
+		return complaintRemark;
+	}
+	public void setComplaintRemark(String complaintRemark) {
+		this.complaintRemark = complaintRemark;
+	}
 }

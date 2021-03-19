@@ -38,7 +38,17 @@
         box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
     }
 .button {
-  background-color: #4CAF50; /* Green */
+  background-color: blue; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.button1{
+  background-color: Orange; /* Green */
   border: none;
   color: white;
   padding: 15px 32px;
@@ -158,7 +168,12 @@
 </head>
 
 <body>
-<!-- <h1>Welcome mode</h1> -->
+<h1>Welcome ${value} </h1>
+  
+
+<div>
+ <a class = "button1"  href = "login"><span>Logout</span></a>
+</div>
   <div class="main">
     <p class="sign" align="center">Complaint Management System</p>
     <form class="form1" action="" method="get" target="_blank">
@@ -166,7 +181,7 @@
    </form>
 
  <form class="form3" action="" method="get" target="_blank">
-  <a class="button" href = "complaints"><span>View Complaints </span></a>
+  <a class="button" href = "viewcomplaints"><span>View Complaints </span></a>
   </form>
   
      

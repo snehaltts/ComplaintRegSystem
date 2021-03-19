@@ -13,6 +13,14 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+         
+   Cookie username = new Cookie("empid", request.getParameter("empid")); 
+   response.addCookie( username );
+
+%>
+ 
+ 
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -33,11 +41,13 @@
                 <tbody>
                     <tr>
                         <td>EmployeeId</td>
-                        <td><input type="text" name="empid" value="" /></td>
+                       
+                        <td><input type="text" name="empid"/></td>
+         					 					
                     </tr>
                     <tr>
                         <td>Password</td>
-                        <td><input type="password" name="pass" value="" /></td>
+                        <td><input type="password" name="pass" /></td>
                     </tr>
                     <tr>
                         <td><input type="submit" value="Login" class = "btn btn-primary"/></td>
@@ -47,9 +57,7 @@
                         <td colspan="2">New User <a href="registration" >Register Here</a></td>
                         
                     </tr>
-                      <tr>
-                         <a href="/">Back To Dashboard</a></td>
-                    </tr>
+                      
                 </tbody>
             </table>
             </center>

@@ -42,12 +42,13 @@
 									<td>Complaint Description</td>
 									<td><textarea type="text" name="complaintDescription" value="" style = "width:350px"></textarea></td>
 								</tr>
-
 								<tr>
 									<td><input type="submit" value="Submit"
 										class='btn btn-primary' /></td>
 									<td><input type="reset" value="Reset"
 										class='btn btn-danger' /></td>
+											<td><a href="welcome"
+										class='btn btn-danger' >Back To Dashboard</a></td>
 								</tr>
 
 							</tbody>

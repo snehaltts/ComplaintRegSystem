@@ -45,6 +45,9 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+			
+			
+			
 			</dependency>
 		
   <!-- JSTL for JSP -->
@@ -68,7 +71,6 @@
             <scope>provided</scope>
         </dependency>
 			
-		
 	</dependencies>
 
 	<build>

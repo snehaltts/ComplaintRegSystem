@@ -1,14 +1,18 @@
 package com.ltts.project.controller;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session.Cookie;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,6 +57,11 @@ public class HomeController {
 	{
 		return new ModelAndView("welcome");
 	}
+//	@RequestMapping("/allcomplaints")
+//	public ModelAndView viewComplaints()
+//	{
+//		return new ModelAndView("complaints");
+//	}
 	@RequestMapping(value="adduser", method=RequestMethod.POST)
 	public ModelAndView addUser(HttpServletRequest req, Model model) {
 		ModelAndView mv=null;
@@ -73,6 +82,7 @@ public class HomeController {
 		if(b==false) {
 			mv=new ModelAndView("success");
 			model.addAttribute("msg", "Successfully Added.. ");
+			
 		}
 		else {
 			mv=new ModelAndView("error");
@@ -110,13 +120,16 @@ public class HomeController {
 			compInc = 4;
 		}
 		String requestStatus = "Pending";
-		System.out.println(compInc);
-		Complaint c = new Complaint (1,complaintType, requestDate,complaintDescription ,compInc,complaintSubject , requestStatus);
+		String empId = req.getParameter("sender");
+		System.out.println("this value" + empId);
+		Complaint c = new Complaint (1,complaintType, requestDate,complaintDescription ,compInc,complaintSubject , requestStatus, empId);
 		System.out.println("***** INSIDE CONTROLLER ****"+c);
 		boolean b=cd.InsertComplaint(c);
 		if(b==false) {
 			mv=new ModelAndView("success");
+			mv = new ModelAndView("welcome");
 			model.addAttribute("msg", "Successfully Added.. ");
+			
 		}
 		else {
 			mv=new ModelAndView("error");
@@ -131,21 +144,15 @@ public class HomeController {
 		ModelAndView mv=null;
 		String empId=req.getParameter("empid");
 		String pass=req.getParameter("pass");
-		System.out.println("Emoddkfnk" + empId);
 		Employee e = md.getMemberByEmpId(empId);
 
-		if(e !=null) {
-			System.out.println("E vlauuye" + pass);
-		System.out.println("Found Here");
-		
-//			if(pass.equals(e.getPassword())) {
+		if(e !=null) {		
 				if(pass.equals(e.getPassword())) {
 
-				model.addAttribute("value", e.getEmpId());
+				model.addAttribute("value", e.getEmpName());
 				mv=new ModelAndView("welcome");
 			}
 			else {
-				System.out.println("Password Wriong Error");
 				model.addAttribute("msg", "Password Wrong");
 				mv=new ModelAndView("login");
 			}
@@ -157,5 +164,48 @@ public class HomeController {
 		}
 		return mv;
 	}
+	@RequestMapping(value="updatecomplaint")
+	public ModelAndView updateComplaint(HttpServletRequest req, Model model) {
+		ModelAndView mv=null;
+		String empId=req.getParameter("empid");
+		String pass=req.getParameter("pass");
+		Employee e = md.getMemberByEmpId(empId);
+
+		if(e !=null) {		
+				if(pass.equals(e.getPassword())) {
+
+				model.addAttribute("value", e.getEmpName());
+				mv=new ModelAndView("welcome");
+			}
+			else {
+				model.addAttribute("msg", "Password Wrong");
+				mv=new ModelAndView("login");
+			}
+		}
+		else {
+			System.out.println("Reached and Not found");
+//			model.addAttribute("msg", "User Not Found Please Register");
+			mv=new ModelAndView("login");
+		}
+		return mv;
+	}
+	@RequestMapping("/viewcomplaints")
+	public ModelAndView viewAllComplaints(Model model) {
+		ModelAndView mv=new ModelAndView("complaints");
+		List<Complaint> li=cd.getAllComplaints();
+		
+		model.addAttribute("list", li);
+		
+		return mv;
+	}
+	   @RequestMapping("/edit/{complaint_id}")
+       public ModelAndView editComp(Model model) {
+           ModelAndView mav = new ModelAndView("feedback");
+//           Product product = service.get(id);
+//           mav.addObject("product", product);
+            
+           return mav;
+       }
+       
 
 }
