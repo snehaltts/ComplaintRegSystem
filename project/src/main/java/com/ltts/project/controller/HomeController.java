@@ -3,6 +3,7 @@ package com.ltts.project.controller;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -73,10 +74,10 @@ public class HomeController {
 		String email = req.getParameter("email");
 		String mobile = req.getParameter("mobile");
 		String password = req.getParameter("password");
-		
+		int role  = 3;
 		
 	//	ApplicationContext ac=new ClassPathXmlApplicationContext();
-		Employee m=new Employee(empName, designation, department, immediateSupervisor, password, email , mobile, empId);
+		Employee m=new Employee(empName, designation, department, immediateSupervisor, password, email , mobile, empId, role);
 		System.out.println("***** INSIDE CONTROLLER ****"+m);
 		boolean b=md.InsertMember(m);
 		if(b==false) {
@@ -95,7 +96,6 @@ public class HomeController {
 	
 	@RequestMapping(value = "addcomplaint", method=RequestMethod.POST)
 	public ModelAndView addCompaint(HttpServletRequest req, Model model)
-
 	{
 		ModelAndView mv = null;
 		String complaintType = req.getParameter("complaintType");
@@ -120,9 +120,12 @@ public class HomeController {
 			compInc = 4;
 		}
 		String requestStatus = "Pending";
-		String empId = req.getParameter("sender");
+		String requestFeedback = "Not Reviewed Yet";
+				
+		String empId = req.getParameter("empid");
+		
 		System.out.println("this value" + empId);
-		Complaint c = new Complaint (1,complaintType, requestDate,complaintDescription ,compInc,complaintSubject , requestStatus, empId);
+		Complaint c = new Complaint (1,complaintType, requestDate,complaintDescription ,compInc,complaintSubject , requestStatus, empId, requestFeedback);
 		System.out.println("***** INSIDE CONTROLLER ****"+c);
 		boolean b=cd.InsertComplaint(c);
 		if(b==false) {
@@ -148,9 +151,17 @@ public class HomeController {
 
 		if(e !=null) {		
 				if(pass.equals(e.getPassword())) {
-
-				model.addAttribute("value", e.getEmpName());
-				mv=new ModelAndView("welcome");
+					if(e.getRole() == 1)
+					{
+						model.addAttribute("value", e.getEmpName());
+						mv=new ModelAndView("WelcomeAdmin");
+					}
+					else
+					{
+						model.addAttribute("value", e.getEmpName());
+						model.addAttribute("eid", e.getEmpId());
+						mv=new ModelAndView("welcome");						
+					}
 			}
 			else {
 				model.addAttribute("msg", "Password Wrong");
@@ -164,31 +175,7 @@ public class HomeController {
 		}
 		return mv;
 	}
-	@RequestMapping(value="updatecomplaint")
-	public ModelAndView updateComplaint(HttpServletRequest req, Model model) {
-		ModelAndView mv=null;
-		String empId=req.getParameter("empid");
-		String pass=req.getParameter("pass");
-		Employee e = md.getMemberByEmpId(empId);
-
-		if(e !=null) {		
-				if(pass.equals(e.getPassword())) {
-
-				model.addAttribute("value", e.getEmpName());
-				mv=new ModelAndView("welcome");
-			}
-			else {
-				model.addAttribute("msg", "Password Wrong");
-				mv=new ModelAndView("login");
-			}
-		}
-		else {
-			System.out.println("Reached and Not found");
-//			model.addAttribute("msg", "User Not Found Please Register");
-			mv=new ModelAndView("login");
-		}
-		return mv;
-	}
+	
 	@RequestMapping("/viewcomplaints")
 	public ModelAndView viewAllComplaints(Model model) {
 		ModelAndView mv=new ModelAndView("complaints");
@@ -206,6 +193,33 @@ public class HomeController {
             
            return mav;
        }
-       
+	   
+	   @RequestMapping(value = "updatecomplaint", method=RequestMethod.POST)
+		public ModelAndView updateCompaint(HttpServletRequest req, Model model)
+		{
+			ModelAndView mv = null;
+			int complaintId = Integer.parseInt(req.getParameter("id"));
+					
+			String feedback = req.getParameter("feedback");
+			String requestStatus = "Resolved";
+			
+			System.out.println("***** INSIDE CONTROLLER ****");
+			boolean b=cd.updateComplaint(complaintId,feedback, requestStatus);
+			
+			if(b==false) 
+			{
+				mv = new ModelAndView("complaints");
+				model.addAttribute("msg", "Successfully Added.. ");
+				
+			}
+			else {
+				mv=new ModelAndView("error");
+				model.addAttribute("msg", "Error due to Connection");
+				
+			}		
+			return mv;
+		
+		}
+	  
 
 }

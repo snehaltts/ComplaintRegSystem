@@ -176,10 +176,7 @@
 </div>
   <div class="main">
     <p class="sign" align="center">Complaint Management System</p>
-    <form class="form1" action="" method="get" target="_blank">
-    <a class="button" href = "putcomplaint"><span>New Complaint</span></a>
-   </form>
-
+ 
  <form class="form3" action="" method="get" target="_blank">
   <a class="button" href = "viewcomplaints"><span>View Complaints </span></a>
   </form>

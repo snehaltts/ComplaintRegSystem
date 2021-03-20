@@ -11,6 +11,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<style>
+.not-active {
+  pointer-events: none;
+  cursor: default;
+  text-decoration: none;
+  color: black;
+}</style>
 </head>
 <body>
 <%-- <h1>View All Complaints</h1>
@@ -22,12 +29,13 @@ ${list} --%>
         url="jdbc:mysql://localhost:3306/hibernate"
         user="root" password="root"
     />
-     
+      <!-- SELECT * FROM complaint where complaint_incharge = 1; -->
     <sql:query var="listUsers"   dataSource="${myDS}">
-        SELECT * FROM complaint where complaint_incharge = 1;
+       
+        SELECT * FROM complaint;
     </sql:query>
-     
-    <div align="center">
+<!--      <form action = "deletecomplaint" method = "delete"> -->    
+	<div align="center">
         <table border="1" cellpadding="5">
             <caption><h2>List of Complaints</h2></caption>
             <tr>
@@ -38,6 +46,7 @@ ${list} --%>
                 <th>Type</th>
                 <th>Date Of Request</th>
                 <th>Status</th>
+                  <th>Remark</th>
                 <th>Action</th>
                 
             </tr>
@@ -50,13 +59,18 @@ ${list} --%>
                      <td><c:out value="${complaint.complaint_type}" /></td>
                       <td><c:out value="${complaint.date_of_request}" /></td>
                     <td><c:out value="${complaint.request_status}" /></td>
+                    <td><c:out value="${complaint.complaint_remark}" /></td>
                      <td>
-                    <a href="/edit/${complaint.complaint_id}">Update</a>
-                    &nbsp;&nbsp;&nbsp;
-                    <a href="/delete/${complaint.complaint_id}">Delete</a>
+					
+                   <%--  <a href="/edit/${complaint.complaint_id}" >Update</a> --%>
+                       		
+                     <a href='/edit/${complaint.complaint_id}'>Update</a>     
+                               
+                    
                 </td>
                 </tr>
             </c:forEach>
+            <!-- </form> -->
             <a href="welcome">Back To DashBoard</a>
         </table>
     </div>

@@ -25,8 +25,22 @@
 								</tr>
 							</thead>
 							<tbody>
+							<tr>
+								<td>Employee Id</td>
+								<%String empId = session.getAttribute(empid) %>
+									<td><input type="hidden" name="empid" value= <%= empId %> style = "width:350px"/></td>
+								</tr>
 								<tr>
 									<td>Complaint Type</td>
+									<td><select class="form-control" id="complainttype" name = "complaintType">
+											<option>HR Department</option>
+											<option>IT Department</option>
+											<option>Security</option>
+											<option>Other</option>
+									</select> </td>
+								</tr>
+								<tr>
+									<td>Complaint Subcategory</td>
 									<td><select class="form-control" id="complainttype" name = "complaintType">
 											<option>HR Department</option>
 											<option>IT Department</option>

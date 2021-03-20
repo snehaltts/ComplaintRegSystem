@@ -43,19 +43,15 @@ ${list} --%>
      %> --%>
      <%
      Object s = request.getAttribute("javax.servlet.forward.request_uri");
-     /* /* out.print(s);  */
-	String s1 = s.toString();
-	  /* out.print(s1); */  
-	  String scvn[] = s1.split("\\/"); 
-	 
-	  
+	 String s1 = s.toString();
+	 String scvn[] = s1.split("\\/"); 
      %>
     <sql:query var="listUsers"   dataSource="${myDS}">	
         SELECT * FROM complaint where complaint_id = <%= scvn[2] %>;
     </sql:query>
      
     <div align="center">
-     <form action="updatecomplaint">
+     <form action="/updatecomplaint" method= "POST">
  <h2>Complaint Description </h2>
         <table border="1" cellpadding="5">
            
@@ -67,20 +63,21 @@ ${list} --%>
             </tr>
             <c:forEach var="complaint" items="${listUsers.rows}">
                 <tr>
-                 <td><c:out value="${complaint.complaint_id}" /></td>
+                 <td><c:out value=  "${complaint.complaint_id}" /></td>
                    <td><c:out value="${complaint.complaint_subject}" /></td>
-                  <td><c:out value="${complaint.complaint_description}" /></td>
+                  <td><c:out value= "${complaint.complaint_description}" /></td>
 			
                 </tr>
                 
             </c:forEach>
             <a href="/welcome">Back To DashBoard</a>
         </table><br>
-        	Give Solution: <textarea></textarea>
-        	 <tr>
-                        <td><input type="submit" value="Submit" class = "btn btn-primary"/></td>
-                        <td><a href="/viewcomplaints"  class = 'btn btn-danger' >Cancel</a></td>
-                    </tr>
+       <input type = "hidden" value = "<%= scvn[2] %>" name = "id"/><br>
+        	Give Remarks: <textarea name = "feedback" ></textarea>
+        	 			
+                        <input type="submit" value="Submit" class = "btn btn-primary"/>
+                     	<a href="/viewcomplaints"  class = 'btn btn-danger' >Cancel</a>
+                    
                     </form>
     </div>
 

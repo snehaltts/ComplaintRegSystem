@@ -63,6 +63,10 @@ public class Complaint implements Serializable {
 	public void setComplaintDescription(String complaintDescription) {
 		this.complaintDescription = complaintDescription;
 	}
+	public Complaint()
+	{
+		super();
+	}
 	public Complaint(int complaintId, String complaintType, LocalDate requestDate, 
 		 String complaintDescription, int complaintIncharge, String complaintSubject, String requestStatus, String empId, String complaintRemark) {
 		super();
@@ -97,10 +101,7 @@ public class Complaint implements Serializable {
 				+ ", complaintDescription=" + complaintDescription + ", complaintSubject=" + complaintSubject + "";
 	}
 	
-	public Complaint()
-	{
-		super();
-	}
+	
 	public String getEmpId() {
 		return empId;
 	}

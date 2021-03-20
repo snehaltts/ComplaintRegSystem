@@ -19,6 +19,7 @@ public class Employee implements Serializable {
 	private String password;
 	private String email;
 	private String mobile;
+	private int role;
 
 	@Id
 	private String empId;
@@ -93,7 +94,7 @@ public class Employee implements Serializable {
 	}
 
 	public Employee(String empName, String designation, String department, String immediateSupervisor, String password,
-			String email, String mobile, String empId) {
+			String email, String mobile, String empId, int role) {
 		super();
 		this.empName = empName;
 		this.designation = designation;
@@ -103,6 +104,7 @@ public class Employee implements Serializable {
 		this.email = email;
 		this.mobile = mobile;
 		this.empId = empId;
+		this.role = role;
 	}
 
 	@Override
@@ -110,6 +112,14 @@ public class Employee implements Serializable {
 		return "Employee [empId = " + empId + "empName=" + empName + ", designation=" + designation + ", department=" + department
 				+ ", immediateSupervisor=" + immediateSupervisor + ", password=" + password + ", email=" + email
 				+ ", mobile=" + mobile + "]";
+	}
+
+	public int getRole() {
+		return role;
+	}
+
+	public void setRole(int role) {
+		this.role = role;
 	}
 
 }
