@@ -13,9 +13,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -58,11 +60,21 @@ public class HomeController {
 	{
 		return new ModelAndView("welcome");
 	}
-//	@RequestMapping("/allcomplaints")
-//	public ModelAndView viewComplaints()
-//	{
-//		return new ModelAndView("complaints");
-//	}
+	@RequestMapping("/allusers")
+	public ModelAndView users()
+	{
+		return new ModelAndView("users");
+	}
+	@RequestMapping("/allresolvers")
+	public ModelAndView resolvers()
+	{
+		return new ModelAndView("resolvers");
+	}
+	@RequestMapping("/allcomplaints")
+	public ModelAndView viewComplaints()
+	{
+		return new ModelAndView("complaintsadmin");
+	}
 	@RequestMapping(value="adduser", method=RequestMethod.POST)
 	public ModelAndView addUser(HttpServletRequest req, Model model) {
 		ModelAndView mv=null;
@@ -75,9 +87,9 @@ public class HomeController {
 		String mobile = req.getParameter("mobile");
 		String password = req.getParameter("password");
 		int role  = 3;
-		
-	//	ApplicationContext ac=new ClassPathXmlApplicationContext();
-		Employee m=new Employee(empName, designation, department, immediateSupervisor, password, email , mobile, empId, role);
+		String assignedRole = "NOT_ASSIGNED";
+	
+		Employee m=new Employee(empName, designation, department, immediateSupervisor, password, email , mobile, empId, role, assignedRole);
 		System.out.println("***** INSIDE CONTROLLER ****"+m);
 		boolean b=md.InsertMember(m);
 		if(b==false) {
@@ -122,15 +134,15 @@ public class HomeController {
 		String requestStatus = "Pending";
 		String requestFeedback = "Not Reviewed Yet";
 				
-		String empId = req.getParameter("empid");
+		String empId = req.getParameter("eid");
 		
 		System.out.println("this value" + empId);
 		Complaint c = new Complaint (1,complaintType, requestDate,complaintDescription ,compInc,complaintSubject , requestStatus, empId, requestFeedback);
 		System.out.println("***** INSIDE CONTROLLER ****"+c);
 		boolean b=cd.InsertComplaint(c);
 		if(b==false) {
-			mv=new ModelAndView("success");
-			mv = new ModelAndView("welcome");
+			mv=new ModelAndView("successcomplaint");
+			/* mv = new ModelAndView("welcome"); */
 			model.addAttribute("msg", "Successfully Added.. ");
 			
 		}
@@ -143,7 +155,7 @@ public class HomeController {
 	
 	}
 	@RequestMapping(value="checkuser")
-	public ModelAndView checkUser(HttpServletRequest req, Model model) {
+	public ModelAndView checkUser(HttpServletRequest req, Model model, ModelMap mm) {
 		ModelAndView mv=null;
 		String empId=req.getParameter("empid");
 		String pass=req.getParameter("pass");
@@ -153,13 +165,24 @@ public class HomeController {
 				if(pass.equals(e.getPassword())) {
 					if(e.getRole() == 1)
 					{
+						mm.put("empId", e.getEmpId());
 						model.addAttribute("value", e.getEmpName());
+//						model.addAttribute("empId", e.getEmpId());
+						model.addAttribute("role", e.getRole());
 						mv=new ModelAndView("WelcomeAdmin");
+					}
+					else if(e.getRole() == 2)
+					{
+						model.addAttribute("value", e.getEmpName());
+						model.addAttribute("empId", e.getEmpId());
+						model.addAttribute("role", e.getRole());
+						mv=new ModelAndView("welcomeResolver");		
 					}
 					else
 					{
 						model.addAttribute("value", e.getEmpName());
-						model.addAttribute("eid", e.getEmpId());
+						model.addAttribute("empId", e.getEmpId());
+						model.addAttribute("role", e.getRole());
 						mv=new ModelAndView("welcome");						
 					}
 			}
@@ -187,13 +210,14 @@ public class HomeController {
 	}
 	   @RequestMapping("/edit/{complaint_id}")
        public ModelAndView editComp(Model model) {
-           ModelAndView mav = new ModelAndView("feedback");
-//           Product product = service.get(id);
-//           mav.addObject("product", product);
-            
+           ModelAndView mav = new ModelAndView("feedback");   
            return mav;
        }
-	   
+	   @RequestMapping("/editemp/{emp_id}")
+       public ModelAndView editEmployee(Model model) {
+           ModelAndView mav = new ModelAndView("editrole");   
+           return mav;
+       }
 	   @RequestMapping(value = "updatecomplaint", method=RequestMethod.POST)
 		public ModelAndView updateCompaint(HttpServletRequest req, Model model)
 		{
@@ -209,6 +233,30 @@ public class HomeController {
 			if(b==false) 
 			{
 				mv = new ModelAndView("complaints");
+				model.addAttribute("msg", "Successfully Added.. ");
+				
+			}
+			else {
+				mv=new ModelAndView("error");
+				model.addAttribute("msg", "Error due to Connection");
+				
+			}		
+			return mv;
+		
+		}
+	   @RequestMapping(value = "updaterole", method=RequestMethod.POST)
+		public ModelAndView updateEmployeeRole(HttpServletRequest req, Model model)
+		{
+			ModelAndView mv = null;
+			String employeeId = req.getParameter("empid");
+			String roleName = req.getParameter("rolename");
+			int role = 2;
+			System.out.println("***** INSIDE CONTROLLER ****");
+			boolean b=md.updateRole(employeeId,roleName, role);
+			
+			if(b==false) 
+			{
+				mv = new ModelAndView("users");
 				model.addAttribute("msg", "Successfully Added.. ");
 				
 			}

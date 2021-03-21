@@ -12,9 +12,15 @@
 </html> --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
- 
 <!DOCTYPE html>
+<%
+         
+   Cookie username = new Cookie("empid", request.getParameter("empid")); 
+   response.addCookie( username );
 
+%>
+ 
+ 
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -24,13 +30,12 @@
     <body bgcolor="white">
           <div class="card">
           <div class="card-body">
-          <br><br><br><br><br><br><br><br><br><br>
         <form action="checkuser">
             <center>
             <table border="0" width="30%" cellpadding="3">
                 <thead>
                     <tr>
-                        <th colspan="2">Login To Complaint Management System</th>
+                        <th colspan="2">Login Page</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,7 +62,6 @@
             </table>
             </center>
         </form>
-                </div> </div>
+              </div> </div>
     </body>
-     
 </html>

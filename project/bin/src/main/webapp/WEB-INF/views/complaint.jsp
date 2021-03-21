@@ -1,22 +1,4 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%   
-Cookie cookie = null;
-Cookie[] cookies = null;
-
-// Get an array of Cookies associated with the this domain
-cookies = request.getCookies();
-String s = "";
-if( cookies != null ) {
-  
-   for (int i = 1; i < cookies.length; i++) {
-      cookie = cookies[i];
-      s  = cookie.getValue();
-   }
-} else {
-	
-   out.println("<h2>No cookies founds</h2>");
-}
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +15,7 @@ if( cookies != null ) {
 		<h1>Complaint Form:</h1>
 		<div class="card">
 			<div class="card-body">
+
 				<form method="post" action="addcomplaint">
 					<center>
 						<table width="50%" cellpadding="5">
@@ -42,10 +25,12 @@ if( cookies != null ) {
 								</tr>
 							</thead>
 							<tbody>
-							
+							<tr>
+								<td>Employee Id</td>
+								<%String empId = session.getAttribute(empid) %>
+									<td><input type="hidden" name="empid" value= <%= empId %> style = "width:350px"/></td>
+								</tr>
 								<tr>
-								<%out.print(s);%>
-							<input type = "hidden" name = "eid" value ="<%=s%>" />
 									<td>Complaint Type</td>
 									<td><select class="form-control" id="complainttype" name = "complaintType">
 											<option>HR Department</option>
@@ -54,7 +39,7 @@ if( cookies != null ) {
 											<option>Other</option>
 									</select> </td>
 								</tr>
-						<!-- 		<tr>
+								<tr>
 									<td>Complaint Subcategory</td>
 									<td><select class="form-control" id="complainttype" name = "complaintType">
 											<option>HR Department</option>
@@ -62,7 +47,7 @@ if( cookies != null ) {
 											<option>Security</option>
 											<option>Other</option>
 									</select> </td>
-								</tr> -->
+								</tr>
 								<tr>
 									<td>Complaint Subject</td>
 									<td><input type="text" name="complaintSubject" value="" style = "width:350px"/></td>
@@ -76,7 +61,7 @@ if( cookies != null ) {
 										class='btn btn-primary' /></td>
 									<td><input type="reset" value="Reset"
 										class='btn btn-danger' /></td>
-											<td><a href="/checkuser?empid=<%=s%>&pass=123"
+											<td><a href="welcome"
 										class='btn btn-danger' >Back To Dashboard</a></td>
 								</tr>
 

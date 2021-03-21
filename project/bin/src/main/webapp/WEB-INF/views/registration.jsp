@@ -9,8 +9,6 @@
     </head>
     <body>
      <div class="container">
-  
-  <br><br><br><br><br><br><br><br>
   <h1>Registration Form:</h1>
   <div class="card">
    <div class="card-body">
@@ -60,7 +58,7 @@
                         <td colspan="2">Already registered!! <a href="login">Click Here To Login</a></td>
                     </tr>
                         <tr>
-                         <a href="/">Back To Main Page</a></td>
+                         <a href="/">Back To Dashboard</a></td>
                     </tr>
                 </tbody>
             </table>
