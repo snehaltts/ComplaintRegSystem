@@ -172,6 +172,7 @@
   <a class="button" href = "allusers"><span>View Users </span></a><br><br>
   <a class="button" href = "allcomplaints"><span>View Complaints </span></a><br><br>
   <a class="button" href = "allresolvers"><span>View Resolvers </span></a><br><br>
+   <a class="button" href = "adddepartment"><span>Assign Role </span></a><br><br>
   
   </form>
      </div>

@@ -45,7 +45,7 @@ if (cookies != null) {
 ${list} --%>
 
 	<sql:setDataSource var="myDS" driver="com.mysql.jdbc.Driver"
-		url="jdbc:mysql://localhost:3306/hibernate" user="root"
+		url="jdbc:mysql://localhost:3306/demo" user="root"
 		password="root" />
 	<!-- SELECT * FROM complaint where complaint_incharge = 1; -->
 	<sql:query var="listUsers" dataSource="${myDS}">

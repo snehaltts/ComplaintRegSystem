@@ -18,6 +18,7 @@ public class Employee implements Serializable {
 	private String mobile;
 	private int role;
 	private String assignedRole;
+	private String hasAssignedRole;
 
 	@Id
 	private String empId;
@@ -92,7 +93,7 @@ public class Employee implements Serializable {
 	}
 
 	public Employee(String empName, String designation, String department, String immediateSupervisor, String password,
-			String email, String mobile, String empId, int role, String assignedRole) {
+			String email, String mobile, String empId, int role, String assignedRole, String hasAssignedRole) {
 		super();
 		this.empName = empName;
 		this.designation = designation;
@@ -104,6 +105,7 @@ public class Employee implements Serializable {
 		this.empId = empId;
 		this.role = role;
 		this.assignedRole = assignedRole;
+		this.hasAssignedRole = hasAssignedRole;
 	}
 
 	@Override
@@ -127,6 +129,14 @@ public class Employee implements Serializable {
 
 	public void setAssignedRole(String assignedRole) {
 		this.assignedRole = assignedRole;
+	}
+
+	public String getHasAssignedRole() {
+		return hasAssignedRole;
+	}
+
+	public void setHasAssignedRole(String hasAssignedRole) {
+		this.hasAssignedRole = hasAssignedRole;
 	}
 
 }

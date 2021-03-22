@@ -77,4 +77,23 @@ public class EmployeeDao {
 		return false;
 	   }
 	
+	public boolean updateRo(String EmployeeID, String assignedRole){
+	      Session session = sf.openSession();
+	      Transaction tx = null;
+	      try{
+	         tx = session.beginTransaction();
+	         Employee employee = 
+	         (Employee)session.get(Employee.class, EmployeeID);
+	         employee.setHasAssignedRole(assignedRole);	
+	         session.update(employee); 
+	         tx.commit();
+	      }catch (HibernateException e) {
+	         if (tx!=null) tx.rollback();
+	         e.printStackTrace(); 
+	      }finally {
+	         session.close(); 
+	      }
+		return false;
+	   }
+	
 }

@@ -38,7 +38,13 @@
                     </tr>
                       <tr>
                         <td>Department</td>
-                        <td><input type="text" name="department" value="" /></td>
+                        <td><select class="form-control" id="dept" name = "department">
+											<option>Development</option>
+											<option>HR</option>
+											<option>IT</option>
+											<option>Security</option>
+											<option>Other</option>
+									</select> </td>
                     </tr> 
                       <tr>
                         <td>Email</td>

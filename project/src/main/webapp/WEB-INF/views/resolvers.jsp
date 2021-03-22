@@ -26,7 +26,7 @@ ${list} --%>
     <sql:setDataSource
         var="myDS"
         driver="com.mysql.jdbc.Driver"
-        url="jdbc:mysql://localhost:3306/hibernate"
+        url="jdbc:mysql://localhost:3306/demo"
         user="root" password="root"
     />
       <!-- SELECT * FROM complaint where complaint_incharge = 1; -->

@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %> 
 <%   
 Cookie cookie = null;
 Cookie[] cookies = null;
@@ -29,6 +31,17 @@ if( cookies != null ) {
 
 </head>
 <body>
+    <sql:setDataSource
+        var="myDS"
+        driver="com.mysql.jdbc.Driver"
+        url="jdbc:mysql://localhost:3306/demo"
+        user="root" password="root"
+    />
+
+    <sql:query var="listDepartment"   dataSource="${myDS}">	
+        SELECT * FROM department;
+    </sql:query>
+     
 	<div class="container">
 		<h1>Complaint Form:</h1>
 		<div class="card">
@@ -45,24 +58,18 @@ if( cookies != null ) {
 							
 								<tr>
 								<%out.print(s);%>
-							<input type = "hidden" name = "eid" value ="<%=s%>" />
-									<td>Complaint Type</td>
-									<td><select class="form-control" id="complainttype" name = "complaintType">
-											<option>HR Department</option>
-											<option>IT Department</option>
-											<option>Security</option>
-											<option>Other</option>
-									</select> </td>
+							<input type = "hidden" name = "eid" value ="<%=s%>" /></tr>
+							<tr>
+									<tr>
+									<td>Select Department</td>
+									<td><select id = "complainttype" name="complaintType">
+    <c:forEach items="${listDepartment.rows}" var="department">
+        <option value="${department.department_name}">${department.department_name} : ${department.emp_id}</option>
+    </c:forEach>
+</select></td>
 								</tr>
-						<!-- 		<tr>
-									<td>Complaint Subcategory</td>
-									<td><select class="form-control" id="complainttype" name = "complaintType">
-											<option>HR Department</option>
-											<option>IT Department</option>
-											<option>Security</option>
-											<option>Other</option>
-									</select> </td>
-								</tr> -->
+								</tr>
+					
 								<tr>
 									<td>Complaint Subject</td>
 									<td><input type="text" name="complaintSubject" value="" style = "width:350px"/></td>

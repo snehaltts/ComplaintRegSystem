@@ -9,9 +9,10 @@ cookies = request.getCookies();
 String s = "";
 if( cookies != null ) {
   
-   for (int i = 1; i < cookies.length; i++) {
+   for (int i = 0; i < cookies.length-1; i++) {
       cookie = cookies[i];
       s  = cookie.getValue();
+      out.print(s.substring(0, 8));
    }
 } else {
 	
