@@ -89,4 +89,3 @@ if( cookies != null ) {
 	</div>
 </body>
 </html>
-]

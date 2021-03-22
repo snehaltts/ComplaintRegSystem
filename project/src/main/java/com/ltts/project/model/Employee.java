@@ -7,9 +7,6 @@ import javax.persistence.Id;
 
 @Entity
 public class Employee implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	private String empName;

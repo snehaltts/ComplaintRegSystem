@@ -168,7 +168,7 @@ form.form3 {
 <script src="/scripts/jquery.min.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body style = "background:https://www.google.com/url?sa=i&url=https%3A%2F%2Fcloudcherry.com%2Fblog%2Fdesigning-customer-complaint-management-system%2F&psig=AOvVaw3msgy8LW4Wl3Au94QdZuxA&ust=1616471087521000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNiLrbCJw-8CFQAAAAAdAAAAABAQ">
 	<h1 style="text-align: center">Complaint Management System</h1>
 	<br>
 	<br>

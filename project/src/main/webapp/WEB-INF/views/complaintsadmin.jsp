@@ -24,7 +24,7 @@
     <sql:setDataSource
         var="myDS"
         driver="com.mysql.jdbc.Driver"
-        url="jdbc:mysql://localhost:3306/demo"
+        url="jdbc:mysql://localhost:3306/hibernate"
         user="root" password="root"
     />
       <!-- SELECT * FROM complaint where complaint_incharge = 1; -->
@@ -57,11 +57,7 @@
                       <td><c:out value="${complaint.date_of_request}" /></td>
                     <td><c:out value="${complaint.request_status}" /></td>
                     <td><c:out value="${complaint.complaint_remark}" /></td>
-                     <td>
-					
-                   <%--  <a href="/edit/${complaint.complaint_id}" >Update</a> --%>                           
-                    
-                </td>
+           
                 </tr>
             </c:forEach>
             <!-- </form> -->

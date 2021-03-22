@@ -171,8 +171,8 @@
  
  <form class="form3" action="" method="get" target="_blank">
   <a class="button" href = "putcomplaint"><span>New Complaint</span></a><br><br>
-  <a class="button" href = "viewcomplaints"><span>Pending Complaints </span></a><br><br>
-  <a class="button" href = "allresolvers"><span>Resolved Complaints </span></a><br><br>
+  <a class="button" href = "pendingcomplaints"><span>Pending Complaints </span></a><br><br>
+  <a class="button" href = "resolvedcomplaints"><span>Resolved Complaints </span></a><br><br>
   
   </form>
      </div>

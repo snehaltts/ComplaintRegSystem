@@ -49,7 +49,7 @@ ${list} --%>
 	<!-- SELECT * FROM complaint where complaint_incharge = 1; -->
 	<sql:query var="listUsers" dataSource="${myDS}">
        
-        SELECT * FROM complaint where  request_status = 'Resolved';
+        SELECT * FROM complaint where  request_status = 'pending';
     </sql:query>
 
 	<div align="center">
@@ -66,7 +66,7 @@ ${list} --%>
 				<th>Date Of Request</th>
 				<th>Status</th>
 				<th>Remark</th>
-
+	<th>Action</th>
 
 			</tr>
 			<c:forEach var="complaint" items="${listUsers.rows}">
@@ -79,12 +79,12 @@ ${list} --%>
 					<td><c:out value="${complaint.date_of_request}" /></td>
 					<td><c:out value="${complaint.request_status}" /></td>
 					<td><c:out value="${complaint.complaint_remark}" /></td>
-					<%--            <td>
+					        <td>
 
                      <a href='/edit/${complaint.complaint_id}'>Update</a>     
                                
                     
-                </td> --%>
+                </td>
 				</tr>
 			</c:forEach>
 			<!-- </form> -->

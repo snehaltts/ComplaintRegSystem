@@ -75,6 +75,16 @@ public class HomeController {
 	{
 		return new ModelAndView("complaintsadmin");
 	}
+	@RequestMapping("/pendingcomplaints")
+	public ModelAndView viewPendingComplaints()
+	{
+		return new ModelAndView("pendingcomplaints");
+	}
+	@RequestMapping("/resolvedcomplaints")
+	public ModelAndView viewResolvedComplaints()
+	{
+		return new ModelAndView("resolvedcomplaints");
+	}
 	@RequestMapping(value="adduser", method=RequestMethod.POST)
 	public ModelAndView addUser(HttpServletRequest req, Model model) {
 		ModelAndView mv=null;
@@ -115,21 +125,27 @@ public class HomeController {
 		String complaintSubject = req.getParameter("complaintSubject");
 		String complaintDescription = req.getParameter("complaintDescription");
 		int compInc;
+		int resolver;
+		
 		if(complaintType.equalsIgnoreCase("HR Department"))
 		{
 			compInc = 1;
+			resolver = 1111;
 		}
 		else 	if(complaintType.equalsIgnoreCase("IT Department"))
 		{
 			compInc = 2;
+			resolver = 2222;
 		}
 		else 	if(complaintType.equalsIgnoreCase("Security"))
 		{
 			compInc = 3;
+			resolver = 3333;
 		}
 		else 
 		{
 			compInc = 4;
+			resolver = 4444;
 		}
 		String requestStatus = "Pending";
 		String requestFeedback = "Not Reviewed Yet";
@@ -137,7 +153,7 @@ public class HomeController {
 		String empId = req.getParameter("eid");
 		
 		System.out.println("this value" + empId);
-		Complaint c = new Complaint (1,complaintType, requestDate,complaintDescription ,compInc,complaintSubject , requestStatus, empId, requestFeedback);
+		Complaint c = new Complaint (1,complaintType, requestDate,complaintDescription ,compInc,complaintSubject , requestStatus, empId, requestFeedback, resolver);
 		System.out.println("***** INSIDE CONTROLLER ****"+c);
 		boolean b=cd.InsertComplaint(c);
 		if(b==false) {

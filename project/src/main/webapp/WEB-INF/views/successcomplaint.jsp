@@ -26,6 +26,6 @@ if( cookies != null ) {
 </head>
 <body>
 <h1>${msg}</h1>
-<a href = "/checkuser?empid=<%=s%>&pass=123">Go to Login Page</a>
+<a href = "/checkuser?empid=<%=s%>&pass=123">Go to Dashboard</a>
 </body>
 </html>
